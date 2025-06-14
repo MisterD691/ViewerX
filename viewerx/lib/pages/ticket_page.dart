@@ -1,6 +1,8 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:viewerx/components/custom_body.dart';
 import 'package:viewerx/components/custom_wave_clipper.dart';
+import 'package:viewerx/components/dashed_line.dart';
 import 'package:viewerx/components/input_button.dart';
 import 'package:viewerx/core/ui_data.dart';
 
@@ -76,7 +78,24 @@ class _TicketPageState extends State<TicketPage> {
                     ],
                   )),
                 ),
-                SizedBox(height: UIData.spaces.big20),
+                SizedBox(height: UIData.spaces.small10),
+                DottedBorder(
+                  color: UIData.colors.orange,
+                  dashPattern: [5, 5],
+                  customPath: (size) {
+                    {
+                      // This code is used to display only border bottom of container
+                      final path = Path();
+                      // Start from bottom left
+                      path.moveTo(0, size.height);
+                      // Move to bottom right
+                      path.lineTo(size.width, size.height);
+                      return path;
+                    }
+                  },
+                  child: Container(),
+                ),
+                SizedBox(height: UIData.spaces.medium15),
                 Container(
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
@@ -209,9 +228,10 @@ class _TicketPageState extends State<TicketPage> {
                 SizedBox(height: UIData.spaces.medium15),
                 InputButton(
                   onPressed: () {
-                    //
+                    Navigator.of(context).pop();
                   },
                   text: "Quitter",
+                  radius: 50,
                   textStyle: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: UIData.text.size20,
@@ -224,6 +244,7 @@ class _TicketPageState extends State<TicketPage> {
                     //
                   },
                   text: "Transférer de nouveau",
+                  radius: 50,
                   outlined: true,
                   textStyle: TextStyle(
                     fontWeight: FontWeight.bold,
