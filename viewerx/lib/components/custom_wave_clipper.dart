@@ -7,13 +7,13 @@ class CustomWaveClipper extends CustomClipper<Path> {
     const waveHeight = 15.0;
     const waveWidth = 20.0;
 
-    // Point de départ en haut à gauche
+    // Starting point at top left
     path.moveTo(0, 0);
 
-    // Descendre à gauche
+    // Move to bottom left
     path.lineTo(0, size.height - waveHeight);
 
-    // Créer les vagues convexes vers le haut
+    // Build waves from bottom left to bottom right
     for (double i = 0; i < size.width; i += waveWidth) {
       double midX = i + waveWidth / 2;
       double endX = i + waveWidth;
@@ -28,7 +28,7 @@ class CustomWaveClipper extends CustomClipper<Path> {
       );
     }
 
-    // Remonter à droite
+    // Move to top right
     path.lineTo(size.width, 0);
 
     return path;
