@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:viewerx/core/ui_data.dart';
 
 class CustomBody extends StatefulWidget {
-  const CustomBody({super.key, this.appBar, required this.child});
+  const CustomBody(
+      {super.key, this.appBar, this.bckColor, required this.child});
   final AppBar? appBar;
+  final Color? bckColor;
   final Widget child;
 
   @override
@@ -15,6 +17,7 @@ class _CustomBodyState extends State<CustomBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: widget.appBar,
+      backgroundColor: widget.bckColor,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.symmetric(

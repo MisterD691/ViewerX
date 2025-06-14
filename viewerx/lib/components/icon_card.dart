@@ -14,9 +14,7 @@ Widget getIconCard({
     ),
     decoration: BoxDecoration(
         color: bckColor ?? UIData.colors.bckOrange,
-        borderRadius: BorderRadius.all(
-          Radius.circular(UIData.radius.rounded16),
-        )),
+        borderRadius: BorderRadius.circular(UIData.radius.rounded16)),
     child: Center(child: icon),
   );
 }

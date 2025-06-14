@@ -23,6 +23,7 @@ class _Colors {
   final Color yellowBtn = const Color(0xFFff9100);
   final Color bckYellow = const Color(0xFFf9c845);
   final Color dark = const Color(0xFF3f3030);
+  final Color bckDark = const Color(0xFF808080);
 }
 
 class _Radius {
@@ -43,6 +44,7 @@ class _Sizes {
 class _Text {
   final double title = 28.0;
   final double subTitle = 16.0;
+  final double size18 = 18.0;
   final double size20 = 20.0;
   final double size12 = 12.0;
 }

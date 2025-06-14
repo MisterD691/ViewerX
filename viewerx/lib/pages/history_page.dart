@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:viewerx/components/icon_card.dart';
 import 'package:viewerx/components/custom_body.dart';
 import 'package:viewerx/core/ui_data.dart';
+import 'package:viewerx/pages/ticket_page.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -89,7 +90,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 "Voir tout",
                 style: TextStyle(
                   color: UIData.colors.marron2,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: UIData.text.subTitle,
                   decoration: TextDecoration.underline,
                 ),
@@ -154,9 +155,7 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
       decoration: BoxDecoration(
         color: UIData.colors.bckOrange,
-        borderRadius: BorderRadius.all(
-          Radius.circular(UIData.radius.rounded16),
-        ),
+        borderRadius: BorderRadius.circular(UIData.radius.rounded16),
       ),
       child: Row(
         children: [
@@ -168,15 +167,22 @@ class _HistoryPageState extends State<HistoryPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text.rich(TextSpan(
-                  text: amount,
-                  style: TextStyle(color: color, fontWeight: FontWeight.bold),
-                  children: [
+              RichText(
+                  text: TextSpan(
+                      text: amount,
+                      style: TextStyle(
+                        color: color,
+                        fontWeight: FontWeight.bold,
+                        fontSize: UIData.text.size18,
+                      ),
+                      children: const [
                     TextSpan(
-                      text: "Fcfa",
-                    ),
+                        text: "Fcfa",
+                        style: TextStyle(
+                            fontSize: 10,
+                            fontFeatures: [FontFeature.superscripts()])),
                   ])),
-              SizedBox(width: UIData.spaces.small10),
+              const SizedBox(height: 5),
               Text(
                 nature,
                 style: TextStyle(color: UIData.colors.lightMarronTxt),
@@ -200,70 +206,78 @@ class _HistoryPageState extends State<HistoryPage> {
     bool succes = true,
   }) {
     {
-      return Row(
-        children: [
-          getIconCard(
-            icon: icon,
-            bckColor: UIData.colors.bckOrange,
-          ),
-          SizedBox(width: UIData.spaces.small10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: UIData.colors.darkMarronTxt,
-                        fontSize: UIData.text.size20,
-                        fontWeight: FontWeight.bold,
+      return InkWell(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const TicketPage(),
+          ));
+        },
+        child: Row(
+          children: [
+            getIconCard(
+              icon: icon,
+              bckColor: UIData.colors.bckOrange,
+            ),
+            SizedBox(width: UIData.spaces.small10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          color: UIData.colors.darkMarronTxt,
+                          fontSize: UIData.text.size20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "${isDeposit ? '+' : '-'}$tAmount / ${isDeposit ? '+' : '-'}$initAmount Fcfa",
-                      style: TextStyle(
-                        color:
-                            isDeposit ? UIData.colors.green : UIData.colors.red,
-                        fontSize: UIData.text.size20,
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        "${isDeposit ? '+' : '-'}$tAmount / ${isDeposit ? '+' : '-'}$initAmount Fcfa",
+                        style: TextStyle(
+                          color: isDeposit
+                              ? UIData.colors.green
+                              : UIData.colors.red,
+                          fontSize: UIData.text.size20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "De $from",
-                      style: TextStyle(
-                        color: UIData.colors.lightMarronTxt,
-                      ),
-                    ),
-                    Text.rich(TextSpan(
-                        text: "$time, ",
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "De $from",
                         style: TextStyle(
                           color: UIData.colors.lightMarronTxt,
                         ),
-                        children: [
-                          TextSpan(
-                            text: status,
-                            style: TextStyle(
-                              color: succes
-                                  ? UIData.colors.green
-                                  : UIData.colors.red,
-                            ),
-                          )
-                        ]))
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
+                      ),
+                      Text.rich(TextSpan(
+                          text: "$time, ",
+                          style: TextStyle(
+                            color: UIData.colors.lightMarronTxt,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: status,
+                              style: TextStyle(
+                                color: succes
+                                    ? UIData.colors.green
+                                    : UIData.colors.red,
+                              ),
+                            )
+                          ]))
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       );
     }
   }
